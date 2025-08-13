@@ -11,6 +11,7 @@ import BusinessDirectory from "./pages/BusinessDirectory";
 import FindShops from "./pages/FindShops";
 import AddBusiness from "./pages/AddBusiness";
 import Auth from "./pages/Auth";
+import AuthCallback from "./pages/AuthCallback";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/add-business" element={<AddBusiness />} />
           <Route path="/auth/signin" element={<Auth />} />
           <Route path="/auth/signup" element={<Auth />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

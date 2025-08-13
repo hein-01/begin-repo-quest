@@ -1,34 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Building2, Smartphone } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { User as SupabaseUser } from "@supabase/supabase-js";
+import { useAuth } from "@/hooks/useAuth";
 
 export const Navbar = () => {
-  const location = useLocation();
-  const [user, setUser] = useState<SupabaseUser | null>(null);
-
-  useEffect(() => {
-    // Get initial user
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user);
-    });
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setUser(session?.user ?? null);
-      }
-    );
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-  };
+  const { user, profile, signOut } = useAuth();
 
   return (
     <nav className="bg-background border-b border-border">
@@ -68,7 +46,7 @@ export const Navbar = () => {
             {user ? (
               <div className="flex items-center space-x-2">
                 <span className="text-sm text-muted-foreground">{user.email}</span>
-                <Button variant="outline" size="sm" onClick={handleSignOut}>
+                <Button variant="outline" size="sm" onClick={signOut}>
                   Sign Out
                 </Button>
               </div>
