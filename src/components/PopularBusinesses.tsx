@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Star, Bookmark, CheckCircle, Check, X, BadgeCheck, MapPin, ArrowRight } from 'lucide-react';
+import { Star, Bookmark, CheckCircle, Check, X, BadgeCheck, MapPin } from 'lucide-react';
 
 interface Business {
   id: number;
@@ -285,11 +285,10 @@ const PopularBusinesses = () => {
                   </Button>
                   
                   <Button 
-                    className="w-full h-8 text-xs flex items-center justify-center gap-2"
+                    className="w-full h-8 text-xs"
                     onClick={() => window.open(business.onlineShopUrl, '_blank')}
                   >
                     Go To Online Shop
-                    <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
                   </Button>
                 </div>
               </CardContent>
