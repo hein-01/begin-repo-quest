@@ -289,7 +289,7 @@ const PopularBusinesses = () => {
                     onClick={() => window.open(business.onlineShopUrl, '_blank')}
                   >
                     Go To Online Shop
-                    <ChevronRight className="w-3 h-3" />
+                    <ChevronRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
                   </Button>
                 </div>
               </CardContent>
