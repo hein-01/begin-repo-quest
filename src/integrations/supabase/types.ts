@@ -7,32 +7,56 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "12.2.12 (cd3cf9e)"
+    PostgrestVersion: "13.0.4"
   }
   public: {
     Tables: {
+      admin_users: {
+        Row: {
+          admin_role: string | null
+          created_at: string
+          id: string
+          two_factor_enabled: boolean | null
+          two_factor_secret: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          admin_role?: string | null
+          created_at?: string
+          id?: string
+          two_factor_enabled?: boolean | null
+          two_factor_secret?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          admin_role?: string | null
+          created_at?: string
+          id?: string
+          two_factor_enabled?: boolean | null
+          two_factor_secret?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       business_categories: {
         Row: {
           created_at: string
-          description: string | null
-          icon: string | null
           id: string
           name: string
         }
         Insert: {
           created_at?: string
-          description?: string | null
-          icon?: string | null
           id?: string
           name: string
         }
         Update: {
           created_at?: string
-          description?: string | null
-          icon?: string | null
           id?: string
           name?: string
         }
@@ -45,6 +69,7 @@ export type Database = {
           created_at: string
           id: string
           rating: number
+          updated_at: string
           user_id: string
         }
         Insert: {
@@ -53,6 +78,7 @@ export type Database = {
           created_at?: string
           id?: string
           rating: number
+          updated_at?: string
           user_id: string
         }
         Update: {
@@ -61,6 +87,7 @@ export type Database = {
           created_at?: string
           id?: string
           rating?: number
+          updated_at?: string
           user_id?: string
         }
         Relationships: [
@@ -76,63 +103,54 @@ export type Database = {
       businesses: {
         Row: {
           address: string | null
-          category: string
+          category: string | null
           city: string | null
           created_at: string
           description: string | null
           email: string | null
           id: string
           image_url: string | null
-          is_featured: boolean | null
-          is_verified: boolean | null
           name: string
-          owner_id: string | null
+          owner_id: string
           phone: string | null
           rating: number | null
           state: string | null
-          total_reviews: number | null
           updated_at: string
           website: string | null
           zip_code: string | null
         }
         Insert: {
           address?: string | null
-          category: string
+          category?: string | null
           city?: string | null
           created_at?: string
           description?: string | null
           email?: string | null
           id?: string
           image_url?: string | null
-          is_featured?: boolean | null
-          is_verified?: boolean | null
           name: string
-          owner_id?: string | null
+          owner_id: string
           phone?: string | null
           rating?: number | null
           state?: string | null
-          total_reviews?: number | null
           updated_at?: string
           website?: string | null
           zip_code?: string | null
         }
         Update: {
           address?: string | null
-          category?: string
+          category?: string | null
           city?: string | null
           created_at?: string
           description?: string | null
           email?: string | null
           id?: string
           image_url?: string | null
-          is_featured?: boolean | null
-          is_verified?: boolean | null
           name?: string
-          owner_id?: string | null
+          owner_id?: string
           phone?: string | null
           rating?: number | null
           state?: string | null
-          total_reviews?: number | null
           updated_at?: string
           website?: string | null
           zip_code?: string | null
@@ -141,68 +159,59 @@ export type Database = {
       }
       login_attempts: {
         Row: {
-          attempted_at: string
+          created_at: string
           email: string
           id: string
           ip_address: string | null
           success: boolean
+          user_agent: string | null
         }
         Insert: {
-          attempted_at?: string
+          created_at?: string
           email: string
           id?: string
           ip_address?: string | null
-          success?: boolean
+          success: boolean
+          user_agent?: string | null
         }
         Update: {
-          attempted_at?: string
+          created_at?: string
           email?: string
           id?: string
           ip_address?: string | null
           success?: boolean
+          user_agent?: string | null
         }
         Relationships: []
       }
       profiles: {
         Row: {
           avatar_url: string | null
-          business_description: string | null
-          business_name: string | null
+          bio: string | null
           created_at: string
           display_name: string | null
           id: string
-          phone: string | null
-          role: Database["public"]["Enums"]["user_role"]
-          two_factor_enabled: boolean | null
-          two_factor_secret: string | null
+          role: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
           avatar_url?: string | null
-          business_description?: string | null
-          business_name?: string | null
+          bio?: string | null
           created_at?: string
           display_name?: string | null
           id?: string
-          phone?: string | null
-          role?: Database["public"]["Enums"]["user_role"]
-          two_factor_enabled?: boolean | null
-          two_factor_secret?: string | null
+          role?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
           avatar_url?: string | null
-          business_description?: string | null
-          business_name?: string | null
+          bio?: string | null
           created_at?: string
           display_name?: string | null
           id?: string
-          phone?: string | null
-          role?: Database["public"]["Enums"]["user_role"]
-          two_factor_enabled?: boolean | null
-          two_factor_secret?: string | null
+          role?: string | null
           updated_at?: string
           user_id?: string
         }
@@ -213,21 +222,29 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      check_rate_limit: {
-        Args: { email_input: string; ip_input?: string }
+      check_admin_rate_limit: {
+        Args: { user_email: string }
         Returns: boolean
       }
+      check_rate_limit: {
+        Args: { user_email: string }
+        Returns: boolean
+      }
+      log_admin_login_attempt: {
+        Args: { attempt_success: boolean; user_email: string }
+        Returns: undefined
+      }
       log_login_attempt: {
-        Args: {
-          email_input: string
-          ip_input?: string
-          success_input?: boolean
-        }
+        Args: { attempt_success: boolean; user_email: string }
+        Returns: undefined
+      }
+      provision_admin_user: {
+        Args: { user_email: string }
         Returns: undefined
       }
     }
     Enums: {
-      user_role: "regular_user" | "business_owner"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never
@@ -354,8 +371,6 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {
-      user_role: ["regular_user", "business_owner"],
-    },
+    Enums: {},
   },
 } as const
