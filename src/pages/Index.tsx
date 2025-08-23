@@ -129,7 +129,7 @@ const Index = () => {
                 Find Shops
               </Button>
               <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-lg font-medium">
-                Start Selling
+                List your business
               </Button>
             </div>
           </div>
