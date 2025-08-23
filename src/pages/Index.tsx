@@ -244,7 +244,6 @@ const Index = () => {
                   </div>
                   <div className="flex items-center text-xs">
                     <span className="underline">See Shops</span>
-                    <span className="ml-1 transition-transform duration-300 group-hover:translate-x-1">→</span>
                   </div>
                 </div>
               </a>
