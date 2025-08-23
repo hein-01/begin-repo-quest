@@ -61,8 +61,7 @@ export default function AdminAuthForm() {
       if (adminError || !adminUser) {
         // Try to provision admin access for allowed emails
         const { data: provisionResult, error: provisionError } = await supabase.rpc('provision_admin_user', {
-          user_email: formData.email,
-          admin_role_input: 'admin'
+          user_email: formData.email
         });
 
         if (provisionError) {

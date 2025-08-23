@@ -24,9 +24,9 @@ interface Business {
   website?: string;
   image_url?: string;
   rating: number;
-  total_reviews: number;
-  is_verified: boolean;
-  is_featured: boolean;
+  owner_id: string;
+  created_at: string;
+  updated_at: string;
 }
 
 interface Review {
@@ -206,14 +206,6 @@ export default function BusinessDetail() {
                   alt={business.name}
                   className="w-full h-64 object-cover rounded-lg"
                 />
-                <div className="absolute top-4 left-4 flex gap-2">
-                  {business.is_featured && (
-                    <Badge>Featured</Badge>
-                  )}
-                  {business.is_verified && (
-                    <Badge variant="secondary">Verified</Badge>
-                  )}
-                </div>
               </div>
             )}
 
@@ -229,7 +221,7 @@ export default function BusinessDetail() {
                       {renderStars(business.rating)}
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">
-                      {business.rating.toFixed(1)} ({business.total_reviews} reviews)
+                      {business.rating.toFixed(1)}
                     </p>
                   </div>
                 </div>
@@ -270,7 +262,7 @@ export default function BusinessDetail() {
             {/* Reviews Section */}
             <Card>
               <CardHeader>
-                <CardTitle>Reviews ({business.total_reviews})</CardTitle>
+                <CardTitle>Reviews</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {reviews.map((review) => (

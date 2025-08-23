@@ -10,6 +10,7 @@ import BusinessDetail from "./pages/BusinessDetail";
 import BusinessDirectory from "./pages/BusinessDirectory";
 import FindShops from "./pages/FindShops";
 import AddBusiness from "./pages/AddBusiness";
+import ListBusiness from "./pages/ListBusiness";
 import Auth from "./pages/Auth";
 import AuthCallback from "./pages/AuthCallback";
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/find-shops" element={<FindShops />} />
           <Route path="/business/:id" element={<BusinessDetail />} />
           <Route path="/add-business" element={<AddBusiness />} />
+          <Route path="/list-business" element={<ListBusiness />} />
           <Route path="/auth/signin" element={<Auth />} />
           <Route path="/auth/signup" element={<Auth />} />
           <Route path="/auth/callback" element={<AuthCallback />} />

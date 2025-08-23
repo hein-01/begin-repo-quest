@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, ShoppingBag, Compass } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import BusinessDirectory from "./BusinessDirectory";
 import PopularBusinesses from "@/components/PopularBusinesses";
@@ -128,8 +129,8 @@ const Index = () => {
               <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">
                 Find Shops
               </Button>
-              <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-lg font-medium">
-                List your business
+              <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-lg font-medium" asChild>
+                <Link to="/list-business">List your business</Link>
               </Button>
             </div>
           </div>

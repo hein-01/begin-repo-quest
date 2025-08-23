@@ -20,9 +20,9 @@ interface Business {
   website?: string;
   image_url?: string;
   rating: number;
-  total_reviews: number;
-  is_verified: boolean;
-  is_featured: boolean;
+  owner_id: string;
+  created_at: string;
+  updated_at: string;
 }
 
 interface Category {
@@ -67,7 +67,6 @@ export default function BusinessDirectory() {
       let query = supabase
         .from("businesses")
         .select("*")
-        .order("is_featured", { ascending: false })
         .order("rating", { ascending: false });
 
       // Apply search filter

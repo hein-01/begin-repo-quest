@@ -18,9 +18,9 @@ interface Business {
   website?: string;
   image_url?: string;
   rating: number;
-  total_reviews: number;
-  is_verified: boolean;
-  is_featured: boolean;
+  owner_id: string;
+  created_at: string;
+  updated_at: string;
 }
 
 interface BusinessCardProps {
@@ -50,16 +50,6 @@ export const BusinessCard = ({ business }: BusinessCardProps) => {
             alt={business.name}
             className="w-full h-48 object-cover rounded-t-lg"
           />
-          {business.is_featured && (
-            <Badge className="absolute top-2 left-2" variant="default">
-              Featured
-            </Badge>
-          )}
-          {business.is_verified && (
-            <Badge className="absolute top-2 right-2" variant="secondary">
-              Verified
-            </Badge>
-          )}
         </div>
       )}
       
@@ -78,7 +68,7 @@ export const BusinessCard = ({ business }: BusinessCardProps) => {
         <div className="flex items-center gap-1">
           {renderStars(business.rating)}
           <span className="text-sm text-muted-foreground ml-2">
-            {business.rating.toFixed(1)} ({business.total_reviews} reviews)
+            {business.rating.toFixed(1)}
           </span>
         </div>
       </CardHeader>

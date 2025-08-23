@@ -43,8 +43,7 @@ export default function AdminCallback() {
             // Try to auto-provision admin for authorized emails
             try {
               const { data: provisionResult } = await supabase.rpc('provision_admin_user', {
-                user_email: data.session.user.email,
-                admin_role_input: 'admin'
+                user_email: data.session.user.email
               });
 
               if ((provisionResult as any)?.success) {

@@ -199,12 +199,6 @@ export default function AdminDashboard() {
                       {adminProfile?.two_factor_enabled ? 'Enabled' : 'Disabled'}
                     </p>
                   </div>
-                  {adminProfile?.last_login_at && (
-                    <div>
-                      <p className="text-sm text-muted-foreground">Last Login</p>
-                      <p className="text-sm">{new Date(adminProfile.last_login_at).toLocaleString()}</p>
-                    </div>
-                  )}
                 </CardContent>
               </Card>
 

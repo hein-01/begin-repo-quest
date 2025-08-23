@@ -21,9 +21,9 @@ interface Business {
   website?: string;
   image_url?: string;
   rating: number;
-  total_reviews: number;
-  is_verified: boolean;
-  is_featured: boolean;
+  owner_id: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export default function FindShops() {
@@ -63,7 +63,6 @@ export default function FindShops() {
       let query = supabase
         .from("businesses")
         .select("*")
-        .order("is_featured", { ascending: false })
         .order("rating", { ascending: false });
 
       if (searchTerm) {
