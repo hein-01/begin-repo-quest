@@ -200,7 +200,7 @@ export const PopularBusinessCard = ({ business }: PopularBusinessCardProps) => {
           </div>
           
           {business.city && business.state && (
-            <p className="text-xs text-muted-foreground flex items-center gap-1 mt-[10px]">
+            <p className="text-xs text-muted-foreground flex items-center gap-1 mt-[7px]">
               <MapPin className="w-3 h-3 text-gray-500" />
               {business.city}, {business.state}
             </p>
@@ -208,7 +208,7 @@ export const PopularBusinessCard = ({ business }: PopularBusinessCardProps) => {
           
           {/* Business Options */}
           {business.business_options && business.business_options.length > 0 && (
-            <div className="flex flex-wrap gap-x-1 gap-y-1">
+            <div className="flex flex-wrap gap-x-1 gap-y-1 mt-[7px]">
               {business.business_options.map((option, index) => (
                 <div key={index}>
                   <span className={`text-xs px-2 py-0.5 rounded border ${getOptionColors(index)}`}>
@@ -220,7 +220,7 @@ export const PopularBusinessCard = ({ business }: PopularBusinessCardProps) => {
           )}
         </div>
         
-        <div className="space-y-2 mt-0 mb-1">
+        <div className="space-y-2 mt-[7px] mb-1">
           <Button
             className="w-full h-8 text-xs flex items-center justify-center gap-1"
             onClick={() => business.website && window.open(business.website, '_blank')}
