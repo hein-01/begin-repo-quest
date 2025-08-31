@@ -200,7 +200,7 @@ export const PopularBusinessCard = ({ business }: PopularBusinessCardProps) => {
           </div>
           
           {business.city && business.state && (
-            <p className="text-xs text-muted-foreground flex items-center gap-1 mt-3">
+            <p className="text-xs text-muted-foreground flex items-center gap-1 mt-[10px]">
               <MapPin className="w-3 h-3 text-gray-500" />
               {business.city}, {business.state}
             </p>
