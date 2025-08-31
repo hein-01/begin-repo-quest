@@ -88,7 +88,7 @@ export const PopularBusinessCard = ({ business }: PopularBusinessCardProps) => {
   };
 
   return (
-    <Card className="group w-full max-w-[320px] h-[455px] flex flex-col shadow-lg hover:shadow-2xl transition-all duration-300 mx-auto">
+    <Card className="group w-full max-w-[320px] h-[470px] flex flex-col shadow-lg hover:shadow-2xl transition-all duration-300 mx-auto">
       <div className="relative overflow-hidden rounded-t-lg">
         <Swiper
           modules={[Navigation, Pagination]}
@@ -179,11 +179,8 @@ export const PopularBusinessCard = ({ business }: PopularBusinessCardProps) => {
         )}
       </div>
       
-      <CardContent className="flex-1 pt-2 px-3 pb-3 flex flex-col justify-between">
-        <div className="space-y-[2px]">
-          <div className="flex items-center justify-between">
-          </div>
-          
+      <CardContent className="flex-1 pt-3 px-3 pb-2 flex flex-col justify-between">
+        <div className="space-y-3">
           <div className="flex items-center gap-2">
             <div className="relative">
               <img 
@@ -200,7 +197,7 @@ export const PopularBusinessCard = ({ business }: PopularBusinessCardProps) => {
           </div>
           
           {business.city && business.state && (
-            <p className="text-xs text-muted-foreground flex items-center gap-1 mt-[7px]">
+            <p className="text-xs text-muted-foreground flex items-center gap-1">
               <MapPin className="w-3 h-3 text-gray-500" />
               {business.city}, {business.state}
             </p>
@@ -208,7 +205,7 @@ export const PopularBusinessCard = ({ business }: PopularBusinessCardProps) => {
           
           {/* Business Options */}
           {business.business_options && business.business_options.length > 0 && (
-            <div className="flex flex-wrap gap-x-1 gap-y-1 mt-[7px]">
+            <div className="flex flex-wrap gap-x-1 gap-y-1">
               {business.business_options.map((option, index) => (
                 <div key={index}>
                   <span className={`text-xs px-2 py-0.5 rounded border ${getOptionColors(index)}`}>
@@ -220,7 +217,7 @@ export const PopularBusinessCard = ({ business }: PopularBusinessCardProps) => {
           )}
         </div>
         
-        <div className="space-y-2 mt-[7px] mb-1">
+        <div className="mt-4">
           <Button
             className="w-full h-8 text-xs flex items-center justify-center gap-1"
             onClick={() => business.website && window.open(business.website, '_blank')}
