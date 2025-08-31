@@ -217,7 +217,7 @@ export const PopularBusinessCard = ({ business }: PopularBusinessCardProps) => {
           )}
         </div>
         
-        <div className="mt-4">
+        <div className="mt-2">
           <Button
             className="w-full h-8 text-xs flex items-center justify-center gap-1"
             onClick={() => business.website && window.open(business.website, '_blank')}
