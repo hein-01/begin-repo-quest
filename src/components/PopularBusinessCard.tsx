@@ -179,7 +179,7 @@ export const PopularBusinessCard = ({ business }: PopularBusinessCardProps) => {
         )}
       </div>
       
-      <CardContent className="flex-1 p-3 flex flex-col justify-between">
+      <CardContent className="flex-1 pt-2 px-3 pb-3 flex flex-col justify-between">
         <div className="space-y-[2px]">
           <div className="flex items-center justify-between">
           </div>
