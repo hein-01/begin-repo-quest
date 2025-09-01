@@ -181,6 +181,28 @@ export default function UserDashboard() {
     fetchUserBusinesses();
   };
 
+  const handleDeleteBookmark = async (bookmarkId: string) => {
+    if (!user?.id) return;
+    
+    try {
+      const { error } = await supabase
+        .from('bookmarks')
+        .delete()
+        .eq('id', bookmarkId)
+        .eq('user_id', user.id);
+      
+      if (error) {
+        console.error('Error deleting bookmark:', error);
+        return;
+      }
+      
+      // Refresh bookmarked businesses
+      fetchBookmarkedBusinesses();
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const getDashboardContent = () => {
     switch (activeSection) {
       case "profile":
@@ -241,10 +263,17 @@ export default function UserDashboard() {
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {bookmarkedBusinesses.map((business) => (
                   <div key={business.id} className="relative">
-                    <div className="absolute top-2 left-2 z-40">
+                    <div className="absolute top-2 left-2 z-40 flex items-center gap-2">
                       <div className="bg-primary text-primary-foreground px-2 py-1 rounded text-xs font-medium">
                         Saved {new Date(business.bookmarkedAt).toLocaleDateString()}
                       </div>
+                      <Button
+                        onClick={() => handleDeleteBookmark(business.bookmarkId)}
+                        size="sm"
+                        className="bg-destructive hover:bg-destructive/90 text-destructive-foreground px-2 py-1 h-auto text-xs rounded"
+                      >
+                        Delete
+                      </Button>
                     </div>
                     <PopularBusinessCard business={business} />
                   </div>
