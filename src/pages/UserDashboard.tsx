@@ -81,10 +81,15 @@ export default function UserDashboard() {
   };
 
   const fetchBookmarkedBusinesses = async () => {
-    if (!user?.id) return;
+    console.log('fetchBookmarkedBusinesses called, user ID:', user?.id);
+    if (!user?.id) {
+      console.log('No user ID, returning early');
+      return;
+    }
     
     setLoadingBookmarks(true);
     try {
+      console.log('Fetching bookmarks for user:', user.id);
       const { data, error } = await supabase
         .from('bookmarks')
         .select(`
@@ -113,6 +118,8 @@ export default function UserDashboard() {
         .eq('user_id', user.id)
         .order('created_at', { ascending: false });
       
+      console.log('Bookmarks query result:', { data, error });
+      
       if (error) {
         console.error('Error fetching bookmarks:', error);
         return;
@@ -120,8 +127,12 @@ export default function UserDashboard() {
       
       // Transform the data to match the expected business format
       const transformedData = data?.map(bookmark => {
+        console.log('Processing bookmark:', bookmark);
         const business = bookmark.businesses as any;
-        if (!business) return null;
+        if (!business) {
+          console.log('No business data found for bookmark:', bookmark.id);
+          return null;
+        }
         return {
           id: business.id,
           name: business.name,
@@ -145,6 +156,7 @@ export default function UserDashboard() {
         };
       }).filter(Boolean) || [];
       
+      console.log('Transformed bookmarked businesses:', transformedData);
       setBookmarkedBusinesses(transformedData);
     } catch (error) {
       console.error('Error:', error);
@@ -154,6 +166,7 @@ export default function UserDashboard() {
   };
 
   const handleSidebarAction = (action: string) => {
+    console.log('Sidebar action triggered:', action);
     setActiveSection(action);
     
     if (action === "website-pos") {
@@ -161,6 +174,7 @@ export default function UserDashboard() {
     } else if (action === "listings" || action === "subscription") {
       fetchUserBusinesses();
     } else if (action === "wishlists") {
+      console.log('Wishlists section selected, fetching bookmarks');
       fetchBookmarkedBusinesses();
     }
   };
