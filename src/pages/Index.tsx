@@ -8,6 +8,7 @@ import { Navbar } from "@/components/Navbar";
 import BusinessDirectory from "./BusinessDirectory";
 import PopularBusinesses from "@/components/PopularBusinesses";
 import Footer from "@/components/Footer";
+import MobileNavBar from "@/components/MobileNavBar";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -314,6 +315,9 @@ const Index = () => {
       
       {/* Footer Section */}
       <Footer />
+      
+      {/* Mobile Navigation Bar */}
+      <MobileNavBar />
     </div>
   );
 };
