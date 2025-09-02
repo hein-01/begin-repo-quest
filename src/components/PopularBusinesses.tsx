@@ -119,13 +119,13 @@ const PopularBusinesses = () => {
               className="popular-businesses-swiper pb-12"
             >
             {businesses.map((business) => (
-              <SwiperSlide key={business.id} className="!w-auto">
+              <SwiperSlide key={business.id} className="!w-[280px]">
                 <PopularBusinessCard business={business} />
               </SwiperSlide>
             ))}
             
-            {/* Fixed seventh card - Discover more shops */}
-            <SwiperSlide key="discover-more">
+            {/* Fixed sixth card - Discover more shops */}
+            <SwiperSlide key="discover-more" className="!w-[280px]">
               <Card className="group w-[280px] h-[475px] flex flex-col shadow-lg hover:shadow-2xl transition-all duration-300 mx-auto bg-gradient-to-br from-slate-800 to-slate-900">
                 <div className="relative overflow-hidden rounded-t-lg h-[200px] bg-gradient-to-br from-slate-700 to-slate-800">
                   <img
@@ -175,13 +175,13 @@ const PopularBusinesses = () => {
               className="popular-businesses-swiper-mobile pb-12 pl-4"
             >
             {businesses.map((business) => (
-              <SwiperSlide key={business.id} className="!w-auto">
+              <SwiperSlide key={business.id} className="!w-[280px]">
                 <PopularBusinessCard business={business} />
               </SwiperSlide>
             ))}
               
-              {/* Fixed seventh card - Discover more shops (Mobile) */}
-              <SwiperSlide key="discover-more-mobile">
+              {/* Fixed sixth card - Discover more shops (Mobile) */}
+              <SwiperSlide key="discover-more-mobile" className="!w-[280px]">
                 <Card className="group w-[280px] h-[475px] flex flex-col shadow-lg hover:shadow-2xl transition-all duration-300 mx-auto bg-gradient-to-br from-slate-800 to-slate-900">
                   <div className="relative overflow-hidden rounded-t-lg h-[200px] bg-gradient-to-br from-slate-700 to-slate-800">
                     <img
