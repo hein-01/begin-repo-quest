@@ -62,7 +62,7 @@ const PopularBusinesses = () => {
           phone
         `)
         .order('created_at', { ascending: false })
-        .limit(6);
+        .limit(5);
         
       if (error) {
         console.error('Error fetching businesses:', error);
