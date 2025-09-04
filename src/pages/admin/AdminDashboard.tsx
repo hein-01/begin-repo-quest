@@ -7,7 +7,6 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 
 import AdminMetrics from "@/components/admin/AdminMetrics";
-import RecentActivity from "@/components/admin/RecentActivity";
 import ListingManagement from "@/components/admin/ListingManagement";
 import ToBeConfirmedListings from "@/components/admin/ToBeConfirmedListings";
 import { 
@@ -148,13 +147,6 @@ export default function AdminDashboard() {
               <ToBeConfirmedListings />
             </div>
 
-            <Separator />
-
-            {/* Recent Activity */}
-            <div>
-              <h2 className="text-2xl font-bold mb-6">Recent Activity</h2>
-              <RecentActivity />
-            </div>
           </div>
         )}
 
