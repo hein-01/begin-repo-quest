@@ -3,11 +3,7 @@ import {
   Users, 
   Store, 
   UserPlus, 
-  DollarSign, 
-  TrendingUp, 
-  Calendar,
-  Eye,
-  ShoppingBag
+  DollarSign
 } from "lucide-react";
 
 export default function AdminMetrics() {
@@ -44,38 +40,6 @@ export default function AdminMetrics() {
       changeType: "positive" as const,
       icon: DollarSign,
       description: "Monthly revenue"
-    },
-    {
-      title: "Page Views",
-      value: "124,583",
-      change: "+5%",
-      changeType: "positive" as const,
-      icon: Eye,
-      description: "This month"
-    },
-    {
-      title: "Active Orders",
-      value: "89",
-      change: "-2%",
-      changeType: "negative" as const,
-      icon: ShoppingBag,
-      description: "Pending orders"
-    },
-    {
-      title: "Growth Rate",
-      value: "15.3%",
-      change: "+2.1%",
-      changeType: "positive" as const,
-      icon: TrendingUp,
-      description: "Monthly growth"
-    },
-    {
-      title: "Avg. Session",
-      value: "4m 32s",
-      change: "+12s",
-      changeType: "positive" as const,
-      icon: Calendar,
-      description: "User engagement"
     }
   ];
 
