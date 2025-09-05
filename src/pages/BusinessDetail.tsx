@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Star, MapPin, Phone, Globe, ArrowLeft, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { User as SupabaseUser } from "@supabase/supabase-js";
+import { format } from "date-fns";
 
 interface Business {
   id: string;
@@ -270,7 +271,7 @@ export default function BusinessDetail() {
                     <div className="flex items-center gap-2 mb-2">
                       {renderStars(review.rating)}
                       <span className="text-sm text-muted-foreground">
-                        {new Date(review.created_at).toLocaleDateString()}
+                        {format(new Date(review.created_at), 'dd/MMM/yyyy')}
                       </span>
                     </div>
                     {review.comment && (

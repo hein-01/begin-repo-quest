@@ -502,7 +502,7 @@ export default function UserDashboard() {
                               <TableCell>
                                 {business.listing_expired_date ? (
                                   <span className={listingExpired ? 'text-destructive' : 'text-muted-foreground'}>
-                                    {new Date(business.listing_expired_date).toLocaleDateString()}
+                                    {format(new Date(business.listing_expired_date), 'dd/MMM/yyyy')}
                                   </span>
                                 ) : (
                                   <span className="text-muted-foreground">No expiry</span>
@@ -512,7 +512,7 @@ export default function UserDashboard() {
                                 <div className="space-y-2">
                                   {business.odoo_expired_date && (
                                     <span className={odooExpired ? 'text-destructive' : 'text-muted-foreground'}>
-                                      {new Date(business.odoo_expired_date).toLocaleDateString()}
+                                      {format(new Date(business.odoo_expired_date), 'dd/MMM/yyyy')}
                                     </span>
                                   )}
                                   {business['POS+Website'] === 0 && (

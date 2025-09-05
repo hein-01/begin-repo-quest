@@ -12,6 +12,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { format } from 'date-fns';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -422,7 +423,7 @@ export const PopularBusinessCard = ({ business }: PopularBusinessCardProps) => {
                             {review.profiles?.display_name || 'Anonymous'}
                           </span>
                           <span className="text-xs text-muted-foreground">
-                            {new Date(review.created_at).toLocaleDateString()}
+                            {format(new Date(review.created_at), 'dd/MMM/yyyy')}
                           </span>
                         </div>
                         <p className="text-sm text-foreground">{review.comment}</p>
