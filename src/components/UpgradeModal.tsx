@@ -55,6 +55,10 @@ export default function UpgradeModal({ isOpen, onClose, businessId, businessName
         .from('business-assets')
         .getPublicUrl(`receipts/${fileName}`);
 
+      // Calculate odoo_expired_date as today + 30 days
+      const odooExpiredDate = new Date();
+      odooExpiredDate.setDate(odooExpiredDate.getDate() + 30);
+
       // Update business with new receipt URL, payment status, POS+Website option, and odoo_expired_date
       const { error: updateError } = await supabase
         .from('businesses')
@@ -62,7 +66,7 @@ export default function UpgradeModal({ isOpen, onClose, businessId, businessName
           receipt_url: urlData.publicUrl,
           payment_status: 'to_be_confirmed',
           last_payment_date: new Date().toISOString(),
-          odoo_expired_date: new Date().toISOString(),
+          odoo_expired_date: odooExpiredDate.toISOString(),
           'POS+Website': 1
         })
         .eq('id', businessId);
