@@ -55,13 +55,14 @@ export default function UpgradeModal({ isOpen, onClose, businessId, businessName
         .from('business-assets')
         .getPublicUrl(`receipts/${fileName}`);
 
-      // Update business with new receipt URL and payment status
+      // Update business with new receipt URL, payment status, and POS+Website option
       const { error: updateError } = await supabase
         .from('businesses')
         .update({
           receipt_url: urlData.publicUrl,
           payment_status: 'to_be_confirmed',
-          last_payment_date: new Date().toISOString()
+          last_payment_date: new Date().toISOString(),
+          'POS+Website': 1
         })
         .eq('id', businessId);
 
