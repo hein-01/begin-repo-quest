@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/table";
 import { ExternalLink, CheckCircle, Edit, Trash2, AlertCircle, Save } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { format } from "date-fns";
+import { formatDateWithOrdinal } from "@/lib/dateUtils";
 
 interface Business {
   id: string;
@@ -173,7 +173,7 @@ export default function ToBeConfirmedListings() {
 
       toast({
         title: "Success",
-        description: `Listing expired date updated to ${format(new Date(newDate), 'dd/MMM/yyyy')}`,
+        description: `Listing expired date updated to ${formatDateWithOrdinal(newDate)}`,
       });
 
       // Remove from editing state
@@ -288,7 +288,7 @@ export default function ToBeConfirmedListings() {
                       </Badge>
                     </TableCell>
                     <TableCell className="text-sm text-muted-foreground">
-                      {format(new Date(listing.created_at), 'dd/MMM/yyyy')}
+                      {formatDateWithOrdinal(listing.created_at)}
                     </TableCell>
                     <TableCell className="text-sm">
                       <div className="flex items-center space-x-2">
@@ -319,7 +319,7 @@ export default function ToBeConfirmedListings() {
                     </TableCell>
                     <TableCell className="text-sm text-muted-foreground">
                       {listing.odoo_expired_date 
-                        ? format(new Date(listing.odoo_expired_date), 'dd/MMM/yyyy')
+                        ? formatDateWithOrdinal(listing.odoo_expired_date)
                         : listing["POS+Website"] === 1 ? 'Will be set on confirm' : 'N/A'
                       }
                     </TableCell>

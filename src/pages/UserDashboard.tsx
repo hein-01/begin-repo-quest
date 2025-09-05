@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import BusinessForm from "@/components/BusinessForm";
 import UpgradeModal from "@/components/UpgradeModal";
 import { addDays, format } from "date-fns";
+import { formatDateWithOrdinal } from "@/lib/dateUtils";
 import { 
   User, 
   Mail, 
@@ -502,7 +503,7 @@ export default function UserDashboard() {
                               <TableCell>
                                 {business.listing_expired_date ? (
                                   <span className={listingExpired ? 'text-destructive' : 'text-muted-foreground'}>
-                                    {format(new Date(business.listing_expired_date), 'dd/MMM/yyyy')}
+                                    {formatDateWithOrdinal(business.listing_expired_date)}
                                   </span>
                                 ) : (
                                   <span className="text-muted-foreground">No expiry</span>
@@ -512,7 +513,7 @@ export default function UserDashboard() {
                                 <div className="space-y-2">
                                   {business.odoo_expired_date && (
                                     <span className={odooExpired ? 'text-destructive' : 'text-muted-foreground'}>
-                                      {format(new Date(business.odoo_expired_date), 'dd/MMM/yyyy')}
+                                      {formatDateWithOrdinal(business.odoo_expired_date)}
                                     </span>
                                   )}
                                   {business['POS+Website'] === 0 && (
