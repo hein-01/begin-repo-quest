@@ -105,6 +105,9 @@ export function PlanFormModal({ isOpen, onClose, onSubmit, plan }: PlanFormModal
           title: "Success",
           description: "Plan created successfully",
         });
+        
+        // Refresh the page after creating a new plan
+        window.location.reload();
       }
 
       onSubmit();
