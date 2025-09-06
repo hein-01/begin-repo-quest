@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -79,6 +79,8 @@ export default function BusinessForm({ onSuccess, editingBusiness }: BusinessFor
   const [receiptFile, setReceiptFile] = useState<File | null>(null);
   const [customProducts, setCustomProducts] = useState<string[]>([]);
   const [newProductName, setNewProductName] = useState("");
+  const [listingPrice, setListingPrice] = useState<string>("");
+  const [odooPrice, setOdooPrice] = useState<string>("");
   
   const [formData, setFormData] = useState<BusinessFormData>({
     name: editingBusiness?.name || "",
@@ -99,6 +101,30 @@ export default function BusinessForm({ onSuccess, editingBusiness }: BusinessFor
     onlineShopOption: "sure",
     paymentOption: "stripe"
   });
+
+  // Fetch plan prices when component mounts
+  useEffect(() => {
+    const fetchPlanPrices = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('plans')
+          .select('name, pricing')
+          .in('name', ['Listing', 'Odoo']);
+
+        if (error) throw error;
+
+        const listingPlan = data?.find(plan => plan.name === 'Listing');
+        const odooPlan = data?.find(plan => plan.name === 'Odoo');
+
+        if (listingPlan) setListingPrice(listingPlan.pricing);
+        if (odooPlan) setOdooPrice(odooPlan.pricing);
+      } catch (error) {
+        console.error('Error fetching plan prices:', error);
+      }
+    };
+
+    fetchPlanPrices();
+  }, []);
 
   const handleInputChange = (field: keyof BusinessFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -632,6 +658,37 @@ export default function BusinessForm({ onSuccess, editingBusiness }: BusinessFor
                 value={formData.tiktokUrl}
                 onChange={(e) => handleInputChange('tiktokUrl', e.target.value)}
                 placeholder="https://tiktok.com/@yourusername"
+              />
+            </div>
+          </div>
+
+          {/* Plan Prices */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <DollarSign className="h-4 w-4 text-muted-foreground" />
+                <Label htmlFor="listingPrice">Listing Price</Label>
+              </div>
+              <Input
+                id="listingPrice"
+                value={listingPrice}
+                readOnly
+                className="bg-muted cursor-not-allowed"
+                placeholder="Loading..."
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <DollarSign className="h-4 w-4 text-muted-foreground" />
+                <Label htmlFor="odooPrice">Odoo Price</Label>
+              </div>
+              <Input
+                id="odooPrice"
+                value={odooPrice}
+                readOnly
+                className="bg-muted cursor-not-allowed"
+                placeholder="Loading..."
               />
             </div>
           </div>
