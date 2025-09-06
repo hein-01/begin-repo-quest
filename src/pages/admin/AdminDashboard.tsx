@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import AdminMetrics from "@/components/admin/AdminMetrics";
 import ListingManagement from "@/components/admin/ListingManagement";
 import ToBeConfirmedListings from "@/components/admin/ToBeConfirmedListings";
+import { PlansManagement } from "@/components/admin/PlansManagement";
 import { 
   Shield, 
   Users, 
@@ -145,6 +146,13 @@ export default function AdminDashboard() {
             <div>
               <h2 className="text-2xl font-bold mb-6">To Be Confirmed Listings</h2>
               <ToBeConfirmedListings />
+            </div>
+
+            <Separator />
+
+            {/* Plans Management */}
+            <div>
+              <PlansManagement />
             </div>
 
           </div>
