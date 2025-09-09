@@ -1,8 +1,11 @@
 import { Home, ShoppingBag, Bookmark, Settings } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 const MobileNavBar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user } = useAuth();
   
   const navItems = [
     {
@@ -20,10 +23,10 @@ const MobileNavBar = () => {
       colors: "text-yellow-500"
     },
     {
-      id: "bookmarks",
-      label: "Bookmarks",
+      id: "saved",
+      label: "Saved",
       icon: Bookmark,
-      path: "/bookmarks",
+      path: "/dashboard", // Will be handled conditionally
       colors: "text-teal-500"
     },
     {
@@ -35,11 +38,25 @@ const MobileNavBar = () => {
     }
   ];
 
-  const isActive = (path: string) => {
-    if (path === "/") {
+  const handleNavClick = (item: any, e: any) => {
+    if (item.id === "saved") {
+      e.preventDefault();
+      if (user) {
+        navigate("/dashboard");
+      } else {
+        navigate("/auth/signin");
+      }
+    }
+  };
+
+  const isActive = (item: any) => {
+    if (item.path === "/") {
       return location.pathname === "/";
     }
-    return location.pathname.startsWith(path);
+    if (item.id === "saved") {
+      return location.pathname === "/dashboard";
+    }
+    return location.pathname.startsWith(item.path);
   };
 
   return (
@@ -47,12 +64,13 @@ const MobileNavBar = () => {
       <div className="flex items-center justify-around h-full">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const active = isActive(item.path);
+          const active = isActive(item);
           
           return (
             <Link
               key={item.id}
               to={item.path}
+              onClick={(e) => handleNavClick(item, e)}
               className={`flex flex-col items-center justify-center flex-1 h-full transition-colors duration-200 ${
                 active ? 'bg-purple-100' : 'hover:bg-gray-50'
               }`}
