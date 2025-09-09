@@ -42,7 +42,7 @@ const MobileNavBar = () => {
     if (item.id === "saved") {
       e.preventDefault();
       if (user) {
-        navigate("/dashboard");
+        navigate("/saved");
       } else {
         navigate("/auth/signin");
       }
@@ -54,7 +54,7 @@ const MobileNavBar = () => {
       return location.pathname === "/";
     }
     if (item.id === "saved") {
-      return location.pathname === "/dashboard";
+      return location.pathname === "/saved";
     }
     return location.pathname.startsWith(item.path);
   };

@@ -12,6 +12,7 @@ import FindShops from "./pages/FindShops";
 import ListBusiness from "./pages/ListBusiness";
 import Auth from "./pages/Auth";
 import AuthCallback from "./pages/AuthCallback";
+import SavedListings from "./pages/SavedListings";
 import AdminAuth from "./pages/admin/AdminAuth";
 import AdminAuthCallback from "./pages/admin/AdminAuthCallback";
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -51,6 +52,11 @@ const App = () => (
             <Route path="/dashboard" element={
               <ProtectedRoute>
                 <UserDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/saved" element={
+              <ProtectedRoute>
+                <SavedListings />
               </ProtectedRoute>
             } />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
