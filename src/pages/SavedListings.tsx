@@ -126,18 +126,7 @@ export default function SavedListings() {
             ) : bookmarkedBusinesses.length > 0 ? (
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {bookmarkedBusinesses.map((business) => (
-                  <div key={business.id} className="relative">
-                    <div className="absolute top-2 right-12 z-40">
-                      <Button
-                        onClick={() => handleDeleteBookmark(business.bookmarkId)}
-                        size="sm"
-                        className="bg-destructive hover:bg-destructive/90 text-destructive-foreground px-2 py-1 h-auto text-xs rounded"
-                      >
-                        Unsave
-                      </Button>
-                    </div>
-                    <PopularBusinessCard business={business} />
-                  </div>
+                  <PopularBusinessCard key={business.id} business={business} />
                 ))}
               </div>
             ) : (
