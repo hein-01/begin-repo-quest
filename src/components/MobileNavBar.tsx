@@ -1,13 +1,14 @@
+import React from "react";
 import { Home, ShoppingBag, Bookmark, Settings } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 
-const MobileNavBar = () => {
+const MobileNavBar = React.memo(() => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useAuth();
   
-  const navItems = [
+  const navItems = React.useMemo(() => [
     {
       id: "home",
       label: "Home",
@@ -36,9 +37,9 @@ const MobileNavBar = () => {
       path: "/dashboard",
       colors: "text-purple-500"
     }
-  ];
+  ], []);
 
-  const handleNavClick = (item: any, e: any) => {
+  const handleNavClick = React.useCallback((item: any, e: any) => {
     if (item.id === "saved") {
       e.preventDefault();
       if (user) {
@@ -47,9 +48,9 @@ const MobileNavBar = () => {
         navigate("/auth/signin");
       }
     }
-  };
+  }, [user, navigate]);
 
-  const isActive = (item: any) => {
+  const isActive = React.useCallback((item: any) => {
     if (item.path === "/") {
       return location.pathname === "/";
     }
@@ -57,7 +58,7 @@ const MobileNavBar = () => {
       return location.pathname === "/saved";
     }
     return location.pathname.startsWith(item.path);
-  };
+  }, [location.pathname]);
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 h-[75px] z-50 md:hidden">
@@ -90,6 +91,8 @@ const MobileNavBar = () => {
       </div>
     </nav>
   );
-};
+});
+
+MobileNavBar.displayName = "MobileNavBar";
 
 export default MobileNavBar;

@@ -16,20 +16,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import AuthModal from "./AuthModal";
 
-export const Navbar = () => {
+export const Navbar = React.memo(() => {
   const { user, profile, signOut } = useAuth();
   const location = useLocation();
   const [authModalOpen, setAuthModalOpen] = useState(false);
   
-  const buttonTexts = [
+  const buttonTexts = React.useMemo(() => [
     "Get Website + POS",
     "Free Business Listing"
-  ];
+  ], []);
 
-  const priceTexts = [
+  const priceTexts = React.useMemo(() => [
     "$10/month",
     "$5/year"
-  ];
+  ], []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
@@ -206,4 +206,6 @@ export const Navbar = () => {
       />
     </nav>
   );
-};
+});
+
+Navbar.displayName = "Navbar";
