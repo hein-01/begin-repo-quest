@@ -192,7 +192,7 @@ const JobPostingForm = ({ onSuccess }: JobPostingFormProps) => {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     // Server-side verification check
     const userAnswer = parseInt(data.verification);
     if (userAnswer !== correctAnswer) {
@@ -204,7 +204,54 @@ const JobPostingForm = ({ onSuccess }: JobPostingFormProps) => {
       return;
     }
     
-    console.log("Job posting data:", data);
+    // Get current user
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
+      toast({
+        title: "Authentication Required",
+        description: "Please log in to post a job.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Prepare job posting data
+    const jobTitle = data.jobTitle === "Custom" ? data.customJobTitle : data.jobTitle;
+    const educationReq = data.educationRequirement === "Custom" 
+      ? data.customEducationRequirement 
+      : data.educationRequirement;
+
+    // Insert into database
+    const { error } = await supabase
+      .from('job_postings')
+      .insert({
+        user_id: user.id,
+        job_title: jobTitle || "",
+        business_name: data.company,
+        job_location: data.location,
+        job_type: data.jobType,
+        salary_type: data.salaryType,
+        salary_amount: parseInt(data.salary),
+        age_min: data.ageRequirement === "custom" ? data.ageFrom : (data.ageRequirement === "18-60" ? 18 : null),
+        age_max: data.ageRequirement === "custom" ? data.ageTo : (data.ageRequirement === "18-60" ? 60 : null),
+        education_requirement: educationReq || "",
+        benefits: data.benefits,
+        application_deadline: data.applicationDeadline,
+        contact_number: data.viberNumber,
+        description: data.jobDescription,
+      } as any);
+
+    if (error) {
+      console.error("Error posting job:", error);
+      toast({
+        title: "Error",
+        description: "Failed to post job. Please try again.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     toast({
       title: "Job Posted Successfully!",
       description: "Your job posting has been submitted.",
@@ -271,9 +318,9 @@ const JobPostingForm = ({ onSuccess }: JobPostingFormProps) => {
           name="company"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Company Name *</FormLabel>
+              <FormLabel>Business Name *</FormLabel>
               <FormControl>
-                <Input placeholder="Your company name" {...field} />
+                <Input placeholder="Your business name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

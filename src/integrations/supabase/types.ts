@@ -356,6 +356,66 @@ export type Database = {
         }
         Relationships: []
       }
+      job_postings: {
+        Row: {
+          age_max: number | null
+          age_min: number | null
+          application_deadline: string
+          benefits: string[] | null
+          business_name: string
+          contact_number: string
+          created_at: string
+          description: string
+          education_requirement: string
+          id: string
+          job_location: string
+          job_title: string
+          job_type: string
+          salary_amount: number
+          salary_type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          age_max?: number | null
+          age_min?: number | null
+          application_deadline: string
+          benefits?: string[] | null
+          business_name: string
+          contact_number: string
+          created_at?: string
+          description: string
+          education_requirement: string
+          id?: string
+          job_location: string
+          job_title: string
+          job_type: string
+          salary_amount: number
+          salary_type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          age_max?: number | null
+          age_min?: number | null
+          application_deadline?: string
+          benefits?: string[] | null
+          business_name?: string
+          contact_number?: string
+          created_at?: string
+          description?: string
+          education_requirement?: string
+          id?: string
+          job_location?: string
+          job_title?: string
+          job_type?: string
+          salary_amount?: number
+          salary_type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       locations: {
         Row: {
           created_at: string
