@@ -215,7 +215,7 @@ const JobPostingForm = ({ onSuccess }: JobPostingFormProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-card p-6 rounded-lg border">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-card p-8 rounded-xl border-2 border-primary/20 shadow-2xl shadow-primary/10 hover:shadow-primary/20 transition-shadow duration-300">
         <FormField
           control={form.control}
           name="jobTitle"
@@ -377,7 +377,7 @@ const JobPostingForm = ({ onSuccess }: JobPostingFormProps) => {
           render={({ field }) => (
             <FormItem className="space-y-3">
               <FormLabel>Minimum Age Requirements *</FormLabel>
-              <FormDescription className="text-xs leading-relaxed">
+              <FormDescription className="text-xs leading-relaxed text-primary font-medium bg-primary/5 p-3 rounded-lg border border-primary/20">
                 Please choose responsibly. Strict age limits (e.g., '20-30') are illegal in many regions (SG, US, UK). While drivers under 25 are statistically far more likely to get into accidents, and youth unemployment (20-30) is strongly linked to social instability and crime, excluding experienced older workers wastes talent. We urge a balanced approach that is fair to all applicants.
               </FormDescription>
               <FormControl>
@@ -471,7 +471,7 @@ const JobPostingForm = ({ onSuccess }: JobPostingFormProps) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Minimum Education Requirements *</FormLabel>
-              <FormDescription className="text-xs leading-relaxed mb-2">
+              <FormDescription className="text-xs leading-relaxed mb-2 text-primary font-medium bg-primary/5 p-3 rounded-lg border border-primary/20">
                 Please rethink Education Requirements before deciding which to choose. For many vital blue-collar and service roles like these, the practice of using an unnecessary education requirement (like a high school diploma or a bachelor's degree) as a simple filter to reduce the number of applicants often backfires. It not only harms your hiring process but also has significant negative impacts on applicants and society as a whole. You immediately disqualify a huge group of excellent candidates. This includes seniors with decades of hands-on experience. It disproportionately locks out qualified individuals from lower-income backgrounds, those who had to work to support their families (and couldn't attend school). When large segments of the population (especially youth) are systematically blocked from stable employment, it can lead to social unrest, economic desperation, and higher crime rates.
               </FormDescription>
               <Select 
@@ -525,7 +525,7 @@ const JobPostingForm = ({ onSuccess }: JobPostingFormProps) => {
             <FormItem>
               <div className="mb-4">
                 <FormLabel className="text-base">Best Practices/Benefits</FormLabel>
-                <FormDescription>
+                <FormDescription className="text-accent-foreground font-medium bg-accent/10 px-3 py-2 rounded-lg border border-accent/20">
                   Select all that apply to your job posting
                 </FormDescription>
               </div>
@@ -607,7 +607,7 @@ const JobPostingForm = ({ onSuccess }: JobPostingFormProps) => {
                   />
                 </PopoverContent>
               </Popover>
-              <FormDescription>
+              <FormDescription className="text-accent-foreground font-medium bg-accent/10 px-3 py-2 rounded-lg border border-accent/20 mt-2">
                 Must be within 60 days from today
               </FormDescription>
               <FormMessage />
@@ -633,7 +633,7 @@ const JobPostingForm = ({ onSuccess }: JobPostingFormProps) => {
                   />
                 </div>
               </FormControl>
-              <FormDescription>
+              <FormDescription className="text-accent-foreground font-medium bg-accent/10 px-3 py-2 rounded-lg border border-accent/20 mt-2">
                 Enter your number starting with 09 (without country code)
               </FormDescription>
               <FormMessage />
@@ -686,7 +686,7 @@ In SG, it's also illegal to describe stereotypes (e.g., 'females preferred for a
           )}
         />
 
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full h-12 text-lg font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300">
           Post Job
         </Button>
       </form>
