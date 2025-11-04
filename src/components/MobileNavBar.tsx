@@ -1,12 +1,10 @@
 import React from "react";
 import { Home, ShoppingBag, Bookmark, Settings, Wrench, Briefcase } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
+
 
 const MobileNavBar = React.memo(() => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const { user } = useAuth();
   
   const navItems = React.useMemo(() => [
     {
@@ -38,13 +36,6 @@ const MobileNavBar = React.memo(() => {
       colors: "text-green-500"
     },
     {
-      id: "saved",
-      label: "Saved",
-      icon: Bookmark,
-      path: "/dashboard", // Will be handled conditionally
-      colors: "text-teal-500"
-    },
-    {
       id: "setting",
       label: "For You",
       icon: Settings,
@@ -53,23 +44,10 @@ const MobileNavBar = React.memo(() => {
     }
   ], []);
 
-  const handleNavClick = React.useCallback((item: any, e: any) => {
-    if (item.id === "saved") {
-      e.preventDefault();
-      if (user) {
-        navigate("/saved");
-      } else {
-        navigate("/auth/signin");
-      }
-    }
-  }, [user, navigate]);
 
   const isActive = React.useCallback((item: any) => {
     if (item.path === "/") {
       return location.pathname === "/";
-    }
-    if (item.id === "saved") {
-      return location.pathname === "/saved";
     }
     return location.pathname.startsWith(item.path);
   }, [location.pathname]);
@@ -85,7 +63,6 @@ const MobileNavBar = React.memo(() => {
             <Link
               key={item.id}
               to={item.path}
-              onClick={(e) => handleNavClick(item, e)}
               className={`flex flex-col items-center justify-center flex-1 h-full transition-colors duration-200 ${
                 active ? 'bg-purple-100' : 'hover:bg-gray-50'
               }`}
