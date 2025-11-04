@@ -366,7 +366,7 @@ const FindJobs = () => {
       <main className="pt-16 pb-8">
         {/* Banner Section */}
         <div 
-          className="relative h-[300px] md:h-[400px] bg-cover bg-center flex items-center justify-center shadow-2xl"
+          className="relative h-[200px] md:h-[250px] bg-cover bg-center flex items-center justify-center shadow-2xl"
           style={{ backgroundImage: `url(${jobBannerBg})` }}
         >
           {/* Overlay */}
@@ -374,9 +374,6 @@ const FindJobs = () => {
           
           {/* Content */}
           <div className="relative z-10 text-center px-4">
-            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 animate-fade-in">
-              Listing your job for free, click here
-            </h2>
             <Button 
               size="lg"
               onClick={() => navigate("/post-a-job")}
