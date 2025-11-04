@@ -452,7 +452,7 @@ const FindJobs = () => {
                       <button
                         key={c.queryKey}
                         onClick={() => setSelectedFilter(c)}
-                        className={`flex-shrink-0 w-[110px] h-[195.5px] rounded-md overflow-hidden relative border-2 ${active ? 'border-primary shadow-[0_0_20px_rgba(166,107,255,0.4)]' : 'border-transparent'} shadow-md`}
+                        className={`flex-shrink-0 w-[110px] h-[195.5px] rounded-md overflow-hidden relative ${active ? 'border-4 border-primary shadow-[0_0_20px_rgba(166,107,255,0.4)]' : 'border-2 border-transparent'} shadow-md`}
                       >
                         <img src={c.imageUrl} alt={c.label} className="w-full h-full object-cover" />
                         <div className="absolute bottom-0 left-0 right-0 bg-black/40 text-white text-xs p-2 text-center">{c.label}</div>
