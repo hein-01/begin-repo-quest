@@ -93,6 +93,12 @@ All colors MUST be HSL.
     --form-upload-border: 254 60% 85%;
     
     --booknget-brand: 45 93% 61%;
+    
+    /* Jobs Page Design Tokens */
+    --jobs-gradient-start: 240 100% 98%;
+    --jobs-gradient-end: 254 100% 99%;
+    --jobs-overlay-start: 254 88% 67%;
+    --jobs-overlay-end: 220 70% 65%;
   }
 
   .dark {

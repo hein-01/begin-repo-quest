@@ -151,7 +151,7 @@ export const JobCard = ({
 
   return (
     <>
-  <div className="bg-card border border-border px-6 pb-6 pt-4 shadow-sm relative h-full flex flex-col">
+  <div className="bg-card border border-border px-6 pb-6 pt-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] relative h-full flex flex-col">
         {/* Report Button */}
         <Button
           variant="destructive"

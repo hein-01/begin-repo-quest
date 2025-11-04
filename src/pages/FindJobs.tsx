@@ -361,16 +361,16 @@ const FindJobs = () => {
   // No multi-select; using single merged selectedFilter
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-[hsl(var(--jobs-gradient-start))] to-[hsl(var(--jobs-gradient-end))]">
       <Navbar />
       <main className="pt-16 pb-8">
         {/* Banner Section */}
         <div 
-          className="relative h-[300px] md:h-[400px] bg-cover bg-center flex items-center justify-center"
+          className="relative h-[300px] md:h-[400px] bg-cover bg-center flex items-center justify-center shadow-2xl"
           style={{ backgroundImage: `url(${jobBannerBg})` }}
         >
           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--jobs-overlay-start))]/60 via-purple-900/50 to-[hsl(var(--jobs-overlay-end))]/60" />
           
           {/* Content */}
           <div className="relative z-10 text-center px-4">
@@ -392,7 +392,7 @@ const FindJobs = () => {
           <div className="max-w-6xl mx-auto">
             
             {/* Filters Section: Merged dropdown and slider; auto-query on change */}
-            <div className="mb-8 p-4 md:p-6 border rounded-lg bg-white shadow-sm">
+            <div className="mb-8 p-4 md:p-6 border rounded-lg bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
               <div className="flex flex-col md:flex-row md:items-start gap-4">
                 {/* Merged Dropdown */}
                 <div className="flex-1 md:flex-1">
@@ -432,7 +432,7 @@ const FindJobs = () => {
                 type="button"
                 aria-label="Previous"
                 onClick={scrollPrev}
-                className="hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-white shadow hover:bg-gray-50 absolute left-0 top-1/2 -translate-y-1/2 z-10"
+                className="hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-white shadow-lg hover:bg-gray-50 absolute left-0 top-1/2 -translate-y-1/2 z-10"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -440,7 +440,7 @@ const FindJobs = () => {
                 type="button"
                 aria-label="Next"
                 onClick={scrollNext}
-                className="hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-white shadow hover:bg-gray-50 absolute right-0 top-1/2 -translate-y-1/2 z-10"
+                className="hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-white shadow-lg hover:bg-gray-50 absolute right-0 top-1/2 -translate-y-1/2 z-10"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -452,7 +452,7 @@ const FindJobs = () => {
                       <button
                         key={c.queryKey}
                         onClick={() => setSelectedFilter(c)}
-                        className={`flex-shrink-0 w-[110px] h-[195.5px] rounded-md overflow-hidden relative border-2 ${active ? 'border-primary' : 'border-transparent'} shadow-sm`}
+                        className={`flex-shrink-0 w-[110px] h-[195.5px] rounded-md overflow-hidden relative border-2 ${active ? 'border-primary shadow-[0_0_20px_rgba(166,107,255,0.4)]' : 'border-transparent'} shadow-md`}
                       >
                         <img src={c.imageUrl} alt={c.label} className="w-full h-full object-cover" />
                         <div className="absolute bottom-0 left-0 right-0 bg-black/40 text-white text-xs p-2 text-center">{c.label}</div>
