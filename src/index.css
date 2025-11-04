@@ -99,6 +99,11 @@ All colors MUST be HSL.
     --jobs-gradient-end: 254 100% 99%;
     --jobs-overlay-start: 254 88% 67%;
     --jobs-overlay-end: 220 70% 65%;
+    
+    /* Auth Form Design Tokens */
+    --auth-gradient-start: 254 100% 99%;
+    --auth-gradient-end: 240 100% 98%;
+    --auth-card-shadow: 254 30% 90%;
   }
 
   .dark {

@@ -195,7 +195,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[hsl(var(--auth-gradient-start))] to-[hsl(var(--auth-gradient-end))] px-4">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <Link to="/" className="flex items-center justify-center space-x-2 mb-6">
@@ -204,8 +204,8 @@ export default function AuthForm({ mode }: AuthFormProps) {
           </Link>
         </div>
 
-        <Card>
-          <CardHeader>
+        <Card className="shadow-[0_8px_40px_rgba(166,107,255,0.15)] border-[hsl(var(--primary))]/10">
+          <CardHeader className="bg-gradient-to-br from-[hsl(var(--primary))]/5 to-transparent border-b border-[hsl(var(--primary))]/10">
             <CardTitle className="text-center">
               {isSignUp ? "Create Account" : "Sign In"}
             </CardTitle>
@@ -313,7 +313,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
                 </div>
               )}
               
-              <Button type="submit" disabled={loading} className="w-full">
+              <Button type="submit" disabled={loading} className="w-full shadow-lg">
                 {loading ? "Loading..." : (isSignUp ? "Create Account" : "Sign In")}
               </Button>
             </form>

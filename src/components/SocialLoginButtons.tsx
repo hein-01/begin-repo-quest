@@ -45,7 +45,7 @@ export function SocialLoginButtons() {
       <Button
         type="button"
         variant="outline"
-        className="w-full"
+        className="w-full shadow-md border-[hsl(var(--primary))]/10"
         onClick={() => handleSocialLogin('google')}
         disabled={loading === 'google'}
       >
@@ -73,7 +73,7 @@ export function SocialLoginButtons() {
       <Button
         type="button"
         variant="outline"
-        className="w-full"
+        className="w-full shadow-md border-[hsl(var(--primary))]/10"
         onClick={() => handleSocialLogin('facebook')}
         disabled={loading === 'facebook'}
       >
@@ -86,7 +86,7 @@ export function SocialLoginButtons() {
       <Button
         type="button"
         variant="outline"
-        className="w-full"
+        className="w-full shadow-md border-[hsl(var(--primary))]/10"
         onClick={handleTwitterLogin}
       >
         <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
