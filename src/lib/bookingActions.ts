@@ -49,7 +49,7 @@ export async function submitBooking(
   slotId: string,
   userId: string,
   amount: number,
-  receiptFile: File
+  receiptFile: File | null
 ): Promise<SubmitBookingResult> {
   const { data: slot, error: slotError } = await supabase
     .from("slots")
@@ -75,9 +75,15 @@ export async function submitBooking(
     return { success: false, error: "Submitted amount does not match the slot price." };
   }
 
-  const uploadResult = await uploadReceipt(slotId, userId, receiptFile);
-  if (uploadResult.success === false) {
-    return { success: false, error: uploadResult.error };
+  let receiptUrl: string | null = null;
+
+  // Only upload receipt if file is provided (not for Cash on Arrival)
+  if (receiptFile) {
+    const uploadResult = await uploadReceipt(slotId, userId, receiptFile);
+    if (uploadResult.success === false) {
+      return { success: false, error: uploadResult.error };
+    }
+    receiptUrl = uploadResult.url;
   }
 
   const { data: bookingData, error: bookingError } = await supabase
@@ -87,7 +93,7 @@ export async function submitBooking(
       resource_id: slot.resource_id,
       user_id: userId,
       payment_amount: slot.slot_price,
-      receipt_url: uploadResult.url,
+      receipt_url: receiptUrl || "Cash on Arrival - No receipt required",
     })
     .select("id")
     .single();
