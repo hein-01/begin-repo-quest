@@ -734,7 +734,9 @@ export default function UserDashboard() {
                       <TableHeader>
                         <TableRow>
                           <TableHead>Service</TableHead>
-                          <TableHead>Time Slot & Field</TableHead>
+                          <TableHead>Date</TableHead>
+                          <TableHead>Time Range</TableHead>
+                          <TableHead>Field Name</TableHead>
                           <TableHead>Amount</TableHead>
                           <TableHead>Status</TableHead>
                           <TableHead>Submitted</TableHead>
@@ -765,21 +767,25 @@ export default function UserDashboard() {
                                 )}
                               </TableCell>
                               <TableCell>
-                                {slotStartTime && slotEndTime ? (
-                                  <div className="flex flex-col gap-1">
-                                    <div className="font-medium">
-                                      {format(slotStartTime, "EEE, MMM dd, yyyy")}
-                                    </div>
-                                    <div className="text-sm text-muted-foreground">
-                                      {format(slotStartTime, "h:mm a")} - {format(slotEndTime, "h:mm a")}
-                                    </div>
-                                    <div className="text-xs text-muted-foreground">
-                                      Field: {fieldName}
-                                    </div>
+                                {slotStartTime ? (
+                                  <div className="font-medium">
+                                    {format(slotStartTime, "EEE, MMM dd, yyyy")}
                                   </div>
                                 ) : (
-                                  <span className="text-muted-foreground">No slot data</span>
+                                  <span className="text-muted-foreground">-</span>
                                 )}
+                              </TableCell>
+                              <TableCell>
+                                {slotStartTime && slotEndTime ? (
+                                  <div className="text-sm">
+                                    {format(slotStartTime, "h:mm a")} - {format(slotEndTime, "h:mm a")}
+                                  </div>
+                                ) : (
+                                  <span className="text-muted-foreground">-</span>
+                                )}
+                              </TableCell>
+                              <TableCell>
+                                <div className="text-sm">{fieldName}</div>
                               </TableCell>
                               <TableCell>
                                 {new Intl.NumberFormat("en-US", {
