@@ -194,6 +194,12 @@ export default function UserDashboard() {
           created_at,
           resource_id,
           user_id,
+          slot_id,
+          slots (
+            start_time,
+            end_time,
+            slot_price
+          ),
           business_resources (
             name,
             business_id,
@@ -226,6 +232,12 @@ export default function UserDashboard() {
           created_at,
           resource_id,
           user_id,
+          slot_id,
+          slots (
+            start_time,
+            end_time,
+            slot_price
+          ),
           business_resources!inner (
             name,
             business_id,
@@ -722,6 +734,7 @@ export default function UserDashboard() {
                       <TableHeader>
                         <TableRow>
                           <TableHead>Service</TableHead>
+                          <TableHead>Time Slot & Field</TableHead>
                           <TableHead>Amount</TableHead>
                           <TableHead>Status</TableHead>
                           <TableHead>Submitted</TableHead>
@@ -739,12 +752,33 @@ export default function UserDashboard() {
                             : 'Expired';
                           const isOwner = booking.business_resources?.businesses?.owner_id === user?.id;
                           
+                          const slotStartTime = booking.slots?.start_time ? new Date(booking.slots.start_time) : null;
+                          const slotEndTime = booking.slots?.end_time ? new Date(booking.slots.end_time) : null;
+                          const fieldName = booking.business_resources?.name || 'N/A';
+                          
                           return (
                             <TableRow key={booking.id}>
                               <TableCell className="font-medium">
                                 {booking.business_resources?.name || 'N/A'}
                                 {isOwner && (
                                   <Badge variant="outline" className="ml-2">Owner</Badge>
+                                )}
+                              </TableCell>
+                              <TableCell>
+                                {slotStartTime && slotEndTime ? (
+                                  <div className="flex flex-col gap-1">
+                                    <div className="font-medium">
+                                      {format(slotStartTime, "EEE, MMM dd, yyyy")}
+                                    </div>
+                                    <div className="text-sm text-muted-foreground">
+                                      {format(slotStartTime, "h:mm a")} - {format(slotEndTime, "h:mm a")}
+                                    </div>
+                                    <div className="text-xs text-muted-foreground">
+                                      Field: {fieldName}
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <span className="text-muted-foreground">No slot data</span>
                                 )}
                               </TableCell>
                               <TableCell>
