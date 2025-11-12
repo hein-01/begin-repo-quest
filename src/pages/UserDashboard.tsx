@@ -197,6 +197,7 @@ export default function UserDashboard() {
           business_resources (
             name,
             business_id,
+            service_id,
             businesses (
               id,
               name,
@@ -228,6 +229,7 @@ export default function UserDashboard() {
           business_resources!inner (
             name,
             business_id,
+            service_id,
             businesses!inner (
               id,
               name,
@@ -249,7 +251,27 @@ export default function UserDashboard() {
         index === self.findIndex(b => b.id === booking.id)
       );
       
-      setPendingBookings(uniqueBookings);
+      // Fetch service contact_phone for each booking
+      const bookingsWithServiceInfo = await Promise.all(
+        uniqueBookings.map(async (booking) => {
+          const serviceId = booking.business_resources?.service_id;
+          if (serviceId) {
+            const { data: serviceData } = await supabase
+              .from('services')
+              .select('contact_phone')
+              .eq('id', serviceId)
+              .maybeSingle();
+            
+            return {
+              ...booking,
+              service_contact_phone: serviceData?.contact_phone || null
+            };
+          }
+          return booking;
+        })
+      );
+      
+      setPendingBookings(bookingsWithServiceInfo);
       
       // Calculate owner pending count
       const ownerCount = (ownerBookings || []).length;
@@ -699,8 +721,7 @@ export default function UserDashboard() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Business</TableHead>
-                          <TableHead>Resource</TableHead>
+                          <TableHead>Service</TableHead>
                           <TableHead>Amount</TableHead>
                           <TableHead>Status</TableHead>
                           <TableHead>Submitted</TableHead>
@@ -721,13 +742,10 @@ export default function UserDashboard() {
                           return (
                             <TableRow key={booking.id}>
                               <TableCell className="font-medium">
-                                {booking.business_resources?.businesses?.name || 'N/A'}
+                                {booking.business_resources?.name || 'N/A'}
                                 {isOwner && (
                                   <Badge variant="outline" className="ml-2">Owner</Badge>
                                 )}
-                              </TableCell>
-                              <TableCell>
-                                {booking.business_resources?.name || 'N/A'}
                               </TableCell>
                               <TableCell>
                                 {new Intl.NumberFormat("en-US", {
@@ -748,19 +766,30 @@ export default function UserDashboard() {
                                 {timeRemaining}
                               </TableCell>
                               <TableCell>
-                                {isOwner && (
-                                  <Button
-                                    size="sm"
-                                    variant="outline"
-                                    onClick={() => {
-                                      setSelectedBookingId(booking.id);
-                                      setConfirmationDialogOpen(true);
-                                    }}
-                                  >
-                                    <Eye className="h-4 w-4 mr-1" />
-                                    Review
-                                  </Button>
-                                )}
+                                <div className="flex flex-col gap-2">
+                                  {isOwner && (
+                                    <Button
+                                      size="sm"
+                                      variant="outline"
+                                      onClick={() => {
+                                        setSelectedBookingId(booking.id);
+                                        setConfirmationDialogOpen(true);
+                                      }}
+                                    >
+                                      <Eye className="h-4 w-4 mr-1" />
+                                      Review
+                                    </Button>
+                                  )}
+                                  {booking.service_contact_phone && (
+                                    <Button
+                                      size="sm"
+                                      variant="default"
+                                      onClick={() => window.open(`tel:${booking.service_contact_phone}`, '_self')}
+                                    >
+                                      Call Provider
+                                    </Button>
+                                  )}
+                                </div>
                               </TableCell>
                             </TableRow>
                           );
